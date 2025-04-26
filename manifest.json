@@ -1,0 +1,18 @@
+{
+  "name": "Grafico de Dona Manizales",
+  "vendor": "Juanfe Montoya",
+  "version": "1",
+  "manifest_version": 1,
+  "components": [
+    {
+      "id": "grafico-dona-manizales",
+      "label": "Gráfico de Dona Mejorado",
+      "description": "Visualización de preferencias sobre Manizales",
+      "url": "https://juanfemontoyas11.github.io/grafico_dona/grafico_dona.html",
+      "iconUrl": "https://cdn-icons-png.flaticon.com/512/3145/3145765.png",
+      "componentType": "viz",
+      "supportedDataTypes": ["TABLE"],
+      "requiredFields": []
+    }
+  ]
+}
