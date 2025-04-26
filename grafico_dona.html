@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        const dataFromStudio = dsccComponent.getData();
+        const fields = dataFromStudio.fields;
+        const rows = dataFromStudio.tables.DEFAULT;
+
+        const counts = {};
+
+        fields.forEach(field => {
+          counts[field.name] = 0;
+        });
+
+        rows.forEach(row => {
+          row.forEach((cell, idx) => {
+            if (cell === 1) {
+              counts[fields[idx].name]++;
+            }
+          });
+        });
+
+        const chartData = new google.visualization.DataTable();
+        chartData.addColumn('string', 'Aspecto');
+        chartData.addColumn('number', 'Cantidad');
+
+        for (const [key, value] of Object.entries(counts)) {
+          chartData.addRow([key, value]);
+        }
+
+        const options = {
+          title: 'Lo que más gusta de Manizales',
+          pieHole: 0.5,
+          pieSliceText: 'percentage',
+          colors: ['#4F81BD', '#C0504D', '#9BBB59', '#8064A2', '#4BACC6', '#F79646', '#7F7F7F'],
+          width: 700,
+          height: 500,
+          animation: {
+            startup: true,
+            duration: 1000,
+            easing: 'out'
+          },
+          titleTextStyle: {
+            fontSize: 18,
+            bold: true
+          }
+        };
+
+        const chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(chartData, options);
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="chart_div"></div>
+  </body>
+</html>
